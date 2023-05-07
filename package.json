@@ -44,5 +44,14 @@
   },
   "devDependencies": {
     "msw": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "type": "module"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
   }
 }
