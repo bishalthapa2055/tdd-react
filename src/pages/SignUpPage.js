@@ -22,7 +22,10 @@ const SignUpPage = () => {
       password,
       passwordRepeat,
     };
-    const response = await axios.post("/api/1.0/user", body);
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/prac",
+      body
+    );
     console.log(response);
   };
 
