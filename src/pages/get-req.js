@@ -5,37 +5,52 @@ import React from "react";
 
 const JosnPlaceHolder = () => {
   const [users, setUsers] = useState([]);
-  const [errors, setErrors] = useState();
+  
 
+
+  // for jsonplaceholder  api 
+  /*
   const fetch = async () => {
     await axios
-      .get("http://localhost:5000/api/v1/gerprac")
+      .get("https://jsonplaceholder.typicode.com/users")
       // .then((res) => res.json())
-      .then((user) => setUsers(user.data.data))
+      .then((data) => setUsers(data.data.map((user) => user.name)))
       .catch(() => setErrors("falied to get users"));
   };
+
+  */
+
+
+  // for my own api 
+ 
+  const fetchFun = async () => {
+   const response = await axios.get("https://reqres.in/api/users");
+   const {data} = response;
+  
+   setUsers(data.data)
+  };
   useEffect(() => {
-    fetch();
+    fetchFun();
   }, []);
 
-  if (users) {
-    // console.log(users);
-  } else {
-    console.log("Loading .....");
-  }
+  
 
+  console.log(users)
   return (
     <div>
       <h1>Users</h1>
-      {errors && <p>{errors}</p>}
 
       <ul>
-        {users?.map((user) => (
-          <li key={user?.email} id={user.email}>
-            {user?.email}
+        {users.map((user) => (
+          <li key={user.id}>
+            
+            {user.email}
           </li>
         ))}
       </ul>
+
+        
+
     </div>
   );
 };
