@@ -50,12 +50,15 @@ export const userData =
 
 
 export const handlers = [
-  rest.post("http://localhost:5000/api/v1/prac", (req, res, ctx) => {
+  rest.post("https://reqres.in/api/login", (req, res, ctx) => {
     // Persist user's authentication in the session
 
     return res(
       // Respond with a 200 status code
-      ctx.status(200)
+      ctx.status(200),
+      ctx.json({
+        token:"1234567890pspsv"
+      })
     );
   }),
 

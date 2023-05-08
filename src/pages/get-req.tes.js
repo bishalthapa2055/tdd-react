@@ -101,6 +101,7 @@ describe("regres render lists",()=>{
     userData.forEach((item) =>{
       expect(screen.getByText(item.email)).toBeInTheDocument()
       expect(screen.getByText(item.email)).toBeVisible()
+      expect(screen.queryByText(item.id)).not.toBeInTheDocument()
     })
 
 
