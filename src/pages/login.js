@@ -52,7 +52,7 @@ try{
         />
       </div>
 
-      {errors && <div>{errors}</div>}
+      {errors && <p>{errors}</p>}
       <button type="submit">Submit</button>
 
       {sucess && <p>{"login sucessfull"}</p>}

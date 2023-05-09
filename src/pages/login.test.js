@@ -40,10 +40,8 @@ describe('Login Form', () => {
         await userEvent.type(screen.getByPlaceholderText("email"),requestBody.email );
         await userEvent.type(screen.getByPlaceholderText("password"),requestBody.password );
         
-        //  userEvent.click(screen.getByRole("button", { name: "Submit" })); 
+         userEvent.click(screen.getByRole("button", { name: "Submit" })); 
       // screen.debug()
-        const buttonClick = await userEvent.click(screen.getByRole("button", { name: "Submit" })); 
-        console.log(buttonClick ,'[button click]')
         //  await waitFor(() => {
         //   expect(requestBody).toEqual({
         //     email: "eve.holt@reqres.in",
@@ -61,10 +59,36 @@ describe('Login Form', () => {
               password: "cityslicka"
             });
 
-            expect(localStorage.getItem('token')).toEqual("1234567890pspsv");
+            expect(localStorage.getItem('token')).toEqual("1234567890pspcc");
 
         
 
 
     })
+    test("for sending post request without correct email and password",async() =>{
+      
+      render(<LoginForm />)
+      const requestBody={
+          email :"eve.holt@reqresin",
+          password :"cityslick"
+      }
+
+      await userEvent.type(screen.getByPlaceholderText("email"),requestBody.email );
+      await userEvent.type(screen.getByPlaceholderText("password"),requestBody.password );
+      
+       userEvent.click(screen.getByRole("button", { name: "Submit" })); 
+
+      await waitFor(()=>{
+        const ack =  screen.queryByText(/user not found/i);
+
+        expect(ack).toBeInTheDocument()
+      })
+      // expect(requestBody).toEqual({
+      //       email: "eve.holt@reqresin",
+      //       password: "cityslicka"
+      //     });
+      
+
+
+  })
  })

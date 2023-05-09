@@ -52,15 +52,25 @@ export const userData =
 export const handlers = [
   rest.post("https://reqres.in/api/login", (req, res, ctx) => {
     // Persist user's authentication in the session
-    console.log(req.body ,'[req.handlers]')
+    const {email , password} = req.body;
 
-    return res(
-      // Respond with a 200 status code
-      ctx.status(200),
-      ctx.json({
-        token:"1234567890pspsv"
-      })
-    );
+    if(email === "eve.holt@reqres.in" ||  password ==="cityslicka"){
+      return res(
+        // Respond with a 200 status code
+        ctx.status(200),
+        ctx.json({
+          token:"1234567890pspcc"
+        })
+      );
+
+    } else{
+      return res(
+        ctx.status(400),
+        ctx.json({
+          error :"user not found"
+        })
+      )
+    }
   }),
 
   rest.get("https://reqres.in/api/users", (req, res, ctx) => {
