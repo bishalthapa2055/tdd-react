@@ -16,7 +16,7 @@ function App() {
   };
   return (
     <>
-      <SignUpPage />
+      {/* <SignUpPage /> */}
       {/* <JosnPlaceHolder /> */}
       {}
      
@@ -34,6 +34,7 @@ function App() {
         />
          )
       } */}
+      <LoginForm />
     </>
   );
 }

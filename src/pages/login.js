@@ -1,33 +1,31 @@
 import axios from "axios";
 import { useState } from "react";
 
-const LoginForm = ({ onLoginSuccess }) => {
-  const [loginCredentials, setLoginCredentials] = useState({
-    password: "",
-    email: "",
-  });
+const LoginForm = () => {
+  const [email , setEmail] = useState('');
+  const [password , setPassword] = useState('')
   const [errors, setErrors] = useState();
+  const [sucess , setSucess] = useState(false)
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 try{
-    const response = await axios.post("https://reqres.in/api/login", loginCredentials);
+  const body={
+    email , password
+  }
+
+  console.log(body ,'[body]')
+    const response = await axios.post("https://reqres.in/api/login", body);
     console.log(response)
     if(response){
-     
-      onLoginSuccess()
+    console.log("hit")
+    localStorage.setItem('token', response.data.token)
+    setSucess(true)
     }
 }catch(e){
     setErrors(e.response?.data.error)
 }
 
-
-
-    // if (data.error) {
-    //   setErrors(true);
-    // } else {
-    //   onLoginSuccess();
-    // }
   };
 
   return (
@@ -36,12 +34,10 @@ try{
         <input
           type={"text"}
           placeholder="email"
+          value={email}
           onChange={(e) =>
-            setLoginCredentials((prevState) => ({
-              ...prevState,
-              email: e.target.value,
-            }))
-          }
+           setEmail(e.target.value)}
+          
         />
       </div>
 
@@ -49,17 +45,17 @@ try{
         <input
           type={"password"}
           placeholder="password"
+          value={password}
           onChange={(e) =>
-            setLoginCredentials((prevState) => ({
-              ...prevState,
-              password: e.target.value,
-            }))
+           setPassword(e.target.value)
           }
         />
       </div>
 
       {errors && <div>{errors}</div>}
       <button type="submit">Submit</button>
+
+      {sucess && <p>{"login sucessfull"}</p>}
     </form>
   );
 };

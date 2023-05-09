@@ -52,6 +52,7 @@ export const userData =
 export const handlers = [
   rest.post("https://reqres.in/api/login", (req, res, ctx) => {
     // Persist user's authentication in the session
+    console.log(req.body ,'[req.handlers]')
 
     return res(
       // Respond with a 200 status code
