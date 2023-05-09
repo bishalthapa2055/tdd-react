@@ -59,6 +59,8 @@ describe('Login Form', () => {
               password: "cityslicka"
             });
 
+            expect(localStorage.getItem("token")).toBeDefined()
+
             expect(localStorage.getItem('token')).toEqual("1234567890pspcc");
 
         
@@ -91,9 +93,27 @@ describe('Login Form', () => {
           email: "eve.holt@reqresin",
           password: "cityslick"
         });
-    
-
-
 })
 
+test("Missong username and password",async() =>{
+      
+  render(<LoginForm />)
+  const requestBody={
+      email :"",
+      password :""
+  }
+
+  await userEvent.type(screen.getByPlaceholderText("email"),requestBody.email );
+  await userEvent.type(screen.getByPlaceholderText("password"),requestBody.password );
+  
+   userEvent.click(screen.getByRole("button", { name: "Submit" })); 
+
+  await waitFor(()=>{
+    const ack =  screen.queryByText(/missing email or username/i);
+
+    expect(ack).toBeInTheDocument()
+  })
+  
+  
+})
  })

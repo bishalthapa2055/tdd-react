@@ -63,14 +63,26 @@ export const handlers = [
         })
       );
 
-    } else{
+    } 
+    
+     if(email=== "eve.holt@reqresin" || password=== "cityslicka"){
       return res(
         ctx.status(400),
         ctx.json({
           error :"user not found"
         })
       )
-    }
+     }
+     if(email === "" || password ===""){
+        return res(
+          ctx.status(400),
+          ctx.json({
+            error:'missing email or username'
+          })
+        )
+     }
+      
+    
   }),
 
   rest.get("https://reqres.in/api/users", (req, res, ctx) => {
