@@ -21,8 +21,10 @@ try{
     console.log("hit")
     localStorage.setItem('token', response.data.token)
     setSucess(true)
+    setErrors("")
     }
 }catch(e){
+  console.log(e)
     setErrors(e.response?.data.error)
 }
 

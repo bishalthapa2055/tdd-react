@@ -65,30 +65,35 @@ describe('Login Form', () => {
 
 
     })
-    test("for sending post request without correct email and password",async() =>{
+   
+ })
+ describe("for invalid credentials" ,() =>{
+  test("for sending post request without correct email and password",async() =>{
       
-      render(<LoginForm />)
-      const requestBody={
-          email :"eve.holt@reqresin",
-          password :"cityslick"
-      }
+    render(<LoginForm />)
+    const requestBody={
+        email :"eve.holt@reqresin",
+        password :"cityslick"
+    }
 
-      await userEvent.type(screen.getByPlaceholderText("email"),requestBody.email );
-      await userEvent.type(screen.getByPlaceholderText("password"),requestBody.password );
-      
-       userEvent.click(screen.getByRole("button", { name: "Submit" })); 
+    await userEvent.type(screen.getByPlaceholderText("email"),requestBody.email );
+    await userEvent.type(screen.getByPlaceholderText("password"),requestBody.password );
+    
+     userEvent.click(screen.getByRole("button", { name: "Submit" })); 
 
-      await waitFor(()=>{
-        const ack =  screen.queryByText(/user not found/i);
+    await waitFor(()=>{
+      const ack =  screen.queryByText(/user not found/i);
 
-        expect(ack).toBeInTheDocument()
-      })
-      // expect(requestBody).toEqual({
-      //       email: "eve.holt@reqresin",
-      //       password: "cityslicka"
-      //     });
-      
+      expect(ack).toBeInTheDocument()
+    })
+    
+    expect(requestBody).toEqual({
+          email: "eve.holt@reqresin",
+          password: "cityslick"
+        });
+    
 
 
-  })
+})
+
  })
